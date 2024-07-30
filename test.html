@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dropdown and Image Animation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            position: relative;
+            margin: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            transition: max-height 0.3s ease-out;
+            overflow: hidden;
+        }
+
+        .dropdown-content.show {
+            display: block;
+            max-height: 500px; /* Adjust as needed */
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .image-container {
+            margin-top: 20px;
+            transition: margin-top 0.3s ease-out;
+        }
+
+        .image-container.move-down {
+            margin-top: 120px; /* Adjust as needed */
+        }
+
+        .responsive-image {
+            width: 100%;
+            max-width: 400px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Button to Toggle Dropdown -->
+        <button onclick="toggleDropdown()">Show Options</button>
+
+        <!-- Dropdown Menu -->
+        <div id="myDropdown" class="dropdown-content">
+            <a href="#">Option 1</a>
+            <a href="#">Option 2</a>
+            <a href="#">Option 3</a>
+        </div>
+
+        <!-- Image Container -->
+        <div id="imageContainer" class="image-container">
+            <img src="slide1.jpg" alt="Sample Image" class="responsive-image">
+        </div>
+    </div>
+
+    <script>
+        function toggleDropdown() {
+            const dropdown = document.getElementById("myDropdown");
+            const imageContainer = document.getElementById("imageContainer");
+
+            if (dropdown.classList.contains("show")) {
+                // Hide the dropdown and move the image up
+                dropdown.classList.remove("show");
+                imageContainer.classList.remove("move-down");
+            } else {
+                // Show the dropdown and move the image down
+                dropdown.classList.add("show");
+                imageContainer.classList.add("move-down");
+            }
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('button')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var imageContainers = document.getElementsByClassName("image-container");
+                
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    var imageContainer = imageContainers[i];
+
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                        imageContainer.classList.remove('move-down');
+                    }
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
